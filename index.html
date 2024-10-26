@@ -15,21 +15,47 @@
             color: white;
             font-family: Arial, sans-serif;
             text-align: center;
+            overflow: hidden;
         }
-        h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
+        #loading {
+            font-size: 2em;
+        }
+        #video-container {
+            display: none; /* Hide the video until it's ready */
         }
     </style>
 </head>
 <body>
-    <h1>You've Been Rickrolled!</h1>
-    <iframe id="rickroll" width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div id="loading">Loading... Please wait.</div>
+    <div id="video-container">
+        <h1>You've Been Rickrolled!</h1>
+        <iframe id="rickroll" width="560" height="315" 
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" 
+                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+        </iframe>
+    </div>
     <script>
-        window.onload = function() {
-            var rickroll = document.getElementById('rickroll');
-            rickroll.src += "&autoplay=1"; // Ensure autoplay
-        };
+        // Function to check if the iframe is ready to play
+        function onYouTubeIframeAPIReady() {
+            const videoContainer = document.getElementById('video-container');
+            const loading = document.getElementById('loading');
+            loading.style.display = 'none'; // Hide loading message
+            videoContainer.style.display = 'block'; // Show video container
+
+            const player = new YT.Player('rickroll', {
+                events: {
+                    'onReady': function(event) {
+                        event.target.playVideo(); // Autoplay the video
+                    }
+                }
+            });
+        }
+
+        // Load YouTube IFrame API
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     </script>
 </body>
 </html>
