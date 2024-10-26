@@ -3,65 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test</title>
+    <title>Test</title>
     <style>
         body {
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
+            height: 100vh; /* Full viewport height */
+            background-color: #f0f0f0; /* Light gray background */
+            font-family: Arial, sans-serif; /* Font style */
         }
         #rickrollButton {
-            padding: 15px 30px;
-            font-size: 20px;
-            background-color: #ff4757;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            padding: 15px 30px; /* Button padding */
+            font-size: 20px; /* Button font size */
+            background-color: #ff4757; /* Initial button color */
+            color: white; /* Button text color */
+            border: none; /* Remove default border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s; /* Smooth background color transition */
         }
         #rickrollButton:hover {
-            background-color: #e84118;
-        }
-        #player {
-            display: none; /* Hide the player initially */
+            background-color: #e84118; /* Button color on hover */
         }
     </style>
 </head>
 <body>
     <button id="rickrollButton">Load Data</button>
-    <div id="player"></div>
+    <audio id="rickrollAudio" src="https://raw.githubusercontent.com/TheAngel6/testbeta/main/Rick-Roll-Sound-Effect.mp3"></audio>
 
     <script>
-        // Load the IFrame Player API code asynchronously
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        const button = document.getElementById('rickrollButton');
+        const audio = document.getElementById('rickrollAudio');
 
-        let player;
-        function onYouTubeIframeAPIReady() {
-            // Create an iframe and YouTube player
-            player = new YT.Player('player', {
-                height: '390',
-                width: '640',
-                videoId: 'Y0bnx6Ndw', // Replace with your video ID
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            const button = document.getElementById('rickrollButton');
-            button.addEventListener('click', () => {
-                player.playVideo(); // Play the video audio
-            });
-        }
+        button.addEventListener('click', () => {
+            audio.play(); // Play audio when button is clicked
+        });
     </script>
 </body>
 </html>
