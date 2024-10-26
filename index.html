@@ -3,75 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fake Scrape Data Button</title>
+    <title>Rickroll</title>
     <style>
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            background-color: #282c34;
-            color: white;
+            background-color: #f0f0f0;
             font-family: Arial, sans-serif;
-            text-align: center;
-            overflow: hidden; /* Hide scrollbars */
         }
-        #scrapeButton {
+        #rickrollButton {
             padding: 15px 30px;
-            font-size: 24px;
+            font-size: 20px;
+            background-color: #ff4757;
             color: white;
-            background-color: #007bff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s;
         }
-        #scrapeButton:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-        }
-        #video-container {
-            display: none; /* Hide the video container initially */
+        #rickrollButton:hover {
+            background-color: #e84118;
         }
     </style>
 </head>
 <body>
-    <button id="scrapeButton">Scrape Data!</button>
-    <div id="video-container">
-        <iframe id="rickroll" width="100%" height="100%" 
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&autoplay=1&mute=1" 
-                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-        </iframe>
-    </div>
-    
+    <button id="rickrollButton">Load Data</button>
+    <audio id="rickrollAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
     <script>
-        // Function to check if the iframe is ready to play
-        function onYouTubeIframeAPIReady() {
-            const videoContainer = document.getElementById('video-container');
-            videoContainer.style.display = 'block'; // Show video container
+        const button = document.getElementById('rickrollButton');
+        const audio = document.getElementById('rickrollAudio');
 
-            const player = new YT.Player('rickroll', {
-                events: {
-                    'onReady': function(event) {
-                        event.target.unMute(); // Unmute the video for sound
-                        event.target.playVideo(); // Autoplay the video
-                    }
-                }
-            });
-        }
-
-        // Load YouTube IFrame API
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        
-        // Button click event
-        document.getElementById('scrapeButton').onclick = function() {
-            this.style.display = 'none'; // Hide the button
-            document.getElementById('video-container').style.display = 'block'; // Show the video
-            onYouTubeIframeAPIReady(); // Load the YouTube video
-        };
+        button.addEventListener('click', () => {
+            audio.play();
+            alert("You've been Rickrolled!");
+        });
     </script>
 </body>
 </html>
